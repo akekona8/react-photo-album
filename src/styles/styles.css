@@ -1,9 +1,14 @@
 body {
   margin: 0;
+  background-color: #606161;
 }
 
 .navText {
-  color: blue;
+  color: white;
+  cursor: pointer;
+  font-family: Arial;
+  font-weight: lighter;
+  margin-left: 30px;
 }
 
 .imageCell {
@@ -14,10 +19,36 @@ body {
 .image {
   width: 20%;
   max-height: 200px;
-  padding: 5px;
   cursor: pointer;
+  border: 5px solid whitesmoke;
+  margin: 5px;
+  /* transform: rotate(15deg); */
+  -webkit-box-shadow: -7px 6px 5px 2px rgba(0, 0, 0, 0.58);
+  -moz-box-shadow: -7px 6px 5px 2px rgba(0, 0, 0, 0.58);
+  box-shadow: -7px 6px 5px 2px rgba(0, 0, 0, 0.58);
 }
 
 .single-photo {
   width: 100%;
+  border: 5px solid whitesmoke;
+  margin: 5px;
+  -webkit-box-shadow: -7px 6px 5px 2px rgba(0, 0, 0, 0.58);
+  -moz-box-shadow: -7px 6px 5px 2px rgba(0, 0, 0, 0.58);
+  box-shadow: -7px 6px 5px 2px rgba(0, 0, 0, 0.58);
+  margin-top: 100px;
+}
+
+.gallery {
+  display: flexbox;
+  margin-top: 20px;
+  text-align: center;
+  vertical-align: middle;
+  align-content: space-around;
+  align-items: baseline;
+  background-color: #606161;
+  /* align-content: flex-start | 
+  flex-end | center | space-between | 
+  space-around | space-evenly | 
+  stretch | start | end | baseline | 
+  first baseline | last baseline + ... safe | unsafe; #dafcf9 */
 }

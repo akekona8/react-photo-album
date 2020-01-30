@@ -6,16 +6,22 @@ export default function AllPhotos(props) {
 
   return (
     <div>
-      {photos.map((photo, index) => {
-        const imageSrc = `data:image/png;base64, ${photo}`;
-        return (
-          <img
-            src={imageSrc}
-            className="image"
-            onClick={() => props.onClickImag(index, imageSrc)}
-          ></img>
-        );
-      })}
+      <div className="gallery">
+        {photos.map((photo, index) => {
+          const imageSrc = `data:image/png;base64, ${photo}`;
+          const randamDegree = {
+            transform: `rotate(${Math.floor(Math.random() * 45) - 22}deg)`
+          };
+          return (
+            <img
+              src={imageSrc}
+              className="image"
+              style={randamDegree}
+              onClick={() => props.selectPhoto(index, imageSrc)}
+            ></img>
+          );
+        })}
+      </div>
     </div>
   );
 }

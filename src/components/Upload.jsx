@@ -21,7 +21,9 @@ export default function Upload(props) {
         accept="image/png, image/jpeg"
         onChange={e => onChange(e)}
       />
-      <button onClick={onButtonClick}>Upload</button>
+      <button onClick={onButtonClick} className="button">
+        UPLOAD
+      </button>
     </div>
   );
 }
