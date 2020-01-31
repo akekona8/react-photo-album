@@ -1,23 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import _ from "lodash";
+import { useSelector, useDispatch } from "react-redux";
+import { selectPhoto } from "../redux/redux";
 
-export default function AllPhotos(props) {
-  const photos = props.photos;
-
+export default function AllPhotos() {
+  const photos = useSelector(state => state.photos);
+  const dispatch = useDispatch();
   return (
     <div>
       <div className="gallery">
-        {photos.map((photo, index) => {
-          const imageSrc = `data:image/png;base64, ${photo}`;
+        {photos.map((photo, imgIndex) => {
+          const imgSrc = `data:image/png;base64, ${photo}`;
           const randamDegree = {
             transform: `rotate(${Math.floor(Math.random() * 45) - 22}deg)`
           };
           return (
             <img
-              src={imageSrc}
+              src={imgSrc}
               className="image"
               style={randamDegree}
-              onClick={() => props.selectPhoto(index, imageSrc)}
+              onClick={() => dispatch(selectPhoto(imgIndex, imgSrc))}
             ></img>
           );
         })}

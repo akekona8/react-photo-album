@@ -1,15 +1,16 @@
 import React, { useRef } from "react";
 import _ from "lodash";
 import "../styles/upload.css";
+import { saveObject } from "../utils/index";
 
-export default function Upload(props) {
+export default function Upload() {
   const inputEl = useRef(null);
 
   const onButtonClick = () => {
     inputEl.current.click();
   };
   const onChange = e => {
-    props.onSaveObject(inputEl.current.files[0]);
+    saveObject(inputEl.current.files[0]);
   };
   return (
     <div className="file-upload">

@@ -1,52 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../styles/styles.css";
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
 import SinglePhoto from "./SinglePhoto";
-import { listObjects } from "../utils/index";
-import { getSingleObject } from "../utils/index";
+import { listObjects, getSingleObject } from "../utils/index";
+import { useSelector, useDispatch } from "react-redux";
+import { storePhoto } from "../redux/redux";
 
 export default function App() {
-  const [currentView, setCurrentView] = useState("AllPhotos");
-  const [photos, setPhotos] = useState([]);
-  const [selectedPhoto, setSelectedPhoto] = useState();
+  const currentView = useSelector(state => state.currentView);
+  const dispatch = useDispatch();
 
   useEffect(async () => {
-    // if (!localStorage.getItem("photo")) {
-    console.log("loading");
     const photoObjects = await listObjects();
     const photos = await Promise.all(
       photoObjects.map(photoObject => {
         return getSingleObject(photoObject.Key);
       })
     );
-    // localStorage.setItem("photo", photos);
-    // }
-    // setPhotos(localStorage.getItem("photo"));
-    setPhotos(photos);
-    // console.log("photos: ", photos);
-    // console.log("localStrage: ", localStorage);
+    dispatch(storePhoto(photos));
   }, []);
-
-  const goHome = () => {
-    setCurrentView("AllPhotos");
-  };
-
-  const selectPhoto = (imgIndex, imageSrc) => {
-    setSelectedPhoto(imageSrc);
-    setCurrentView("SinglePhoto");
-  };
 
   const displayPhoto = () => {
     if (currentView === "AllPhotos") {
-      return <AllPhotos photos={photos} selectPhoto={selectPhoto} />;
+      return <AllPhotos />;
     } else {
-      return <SinglePhoto img={selectedPhoto} />;
+      return <SinglePhoto />;
     }
   };
   return (
     <div className="app">
-      <Navbar receiveFiles={goHome} />
+      <Navbar />
       {displayPhoto()}
     </div>
   );
