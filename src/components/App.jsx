@@ -11,14 +11,17 @@ export default function App() {
   const currentView = useSelector(state => state.currentView);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    const photoObjects = await listObjects();
-    const photos = await Promise.all(
-      photoObjects.map(photoObject => {
-        return getSingleObject(photoObject.Key);
-      })
-    );
-    dispatch(storePhoto(photos));
+  useEffect(() => {
+    async function fetchData() {
+      const photoObjects = await listObjects();
+      const photos = await Promise.all(
+        photoObjects.map(photoObject => {
+          return getSingleObject(photoObject.Key);
+        })
+      );
+      dispatch(storePhoto(photos));
+    }
+    fetchData();
   }, []);
 
   const displayPhoto = () => {
